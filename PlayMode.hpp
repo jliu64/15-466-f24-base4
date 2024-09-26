@@ -7,7 +7,15 @@
 
 #include <vector>
 #include <deque>
+#include <map>
 
+#include <hb.h>
+#include <hb-ft.h>
+#include <ft2build.h>
+#include <iostream>
+#include FT_FREETYPE_H
+
+// Based on code from lecture/Discord by Jim McCann
 struct PlayMode : Mode {
 	PlayMode();
 	virtual ~PlayMode();
@@ -19,30 +27,31 @@ struct PlayMode : Mode {
 
 	//----- game state -----
 
+	struct Character {
+        unsigned int TextureID;  // ID handle of the glyph texture
+        glm::ivec2   Size;       // Size of glyph
+        glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
+        FT_Pos Advance;    // Offset to advance to next glyph
+    };
+
+	std::map<char, Character> Characters;
+	float x = 0.0f;
+	float y = 0.0f;
+
+	unsigned int VAO, VBO;
+
 	//input tracking:
 	struct Button {
 		uint8_t downs = 0;
 		uint8_t pressed = 0;
 	} left, right, down, up;
 
-	//local copy of the game scene (so code can change it during gameplay):
-	Scene scene;
-
-	//hexapod leg to wobble:
-	Scene::Transform *hip = nullptr;
-	Scene::Transform *upper_leg = nullptr;
-	Scene::Transform *lower_leg = nullptr;
-	glm::quat hip_base_rotation;
-	glm::quat upper_leg_base_rotation;
-	glm::quat lower_leg_base_rotation;
-	float wobble = 0.0f;
-
-	glm::vec3 get_leg_tip_position();
-
-	//music coming from the tip of the leg (as a demonstration):
-	std::shared_ptr< Sound::PlayingSample > leg_tip_loop;
-	
-	//camera:
-	Scene::Camera *camera = nullptr;
+	char *text = "You stand in the middle of the dungeon.\n"
+		"A single beam of sunlight pours from a small crack in the ceiling high above,\n"
+		"illuminating a circular room lined with ancient stone sarcophagi.\n"
+		"There are doorways in each of the four cardinal directions.\n"
+		"Move with WASD.";
+	glm::vec2 position;
+	std::map<float, char *> text_repo;
 
 };
