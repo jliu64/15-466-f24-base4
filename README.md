@@ -16,7 +16,7 @@ How To Play:
 
 Right now, all you can do is move around the map with WASD.
 
-Sources: GentiumBookPlus-Regular.ttf: https://fonts.google.com/specimen/Gentium+Book+Plus (see README-fonts-OFL.txt)
+Sources: GentiumBookPlus-Regular.ttf (see README-fonts-OFL.txt): https://fonts.google.com/specimen/Gentium+Book+Plus
 
 Parts of this program are based off of code from lecture/Discord by Jim McCann, the Harfbuzz tutorial (https://github.com/harfbuzz/harfbuzz-tutorial/blob/master/hello-harfbuzz-freetype.c), the Freetype tutorial (https://freetype.org/freetype2/docs/tutorial/step1.html), and the OpenGL text rendering tutorial (https://learnopengl.com/In-Practice/Text-Rendering)
 
